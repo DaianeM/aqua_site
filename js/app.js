@@ -23,7 +23,6 @@ $('[data-group').each(function(){
 
 
 //ANIMANDO O SCROLL
-
 $('.menu-nav a[href^="#"]').click(function (e) {
   e.preventDefault();
   var id = $(this).attr('href'),
@@ -33,7 +32,7 @@ $('.menu-nav a[href^="#"]').click(function (e) {
   $('html, body').animate({
     scrollTop: targetOffset - menuHeight
   }, 500);
-})
+});
 
 //VOLTAR PARA O TOPO QUANDO CLICAR NA LOGO
 $('.logo').click(function(e){
@@ -41,6 +40,25 @@ $('.logo').click(function(e){
   $('html,body').animate({
     scrollTop: 0
   }, 500);
+});
+
+
+//SCROLL SUAVE LINK ATIVO
+$('section').each(function(){
+  var height = $(this).height(),
+      offsetTop = $(this).offset().top,
+      menuHeight = $('.menu').innerHeight(),
+      id = $(this).attr('id'),
+      $itemMenu = $('a[href="#' + id +'"]');
+
+  $(window).scroll(function(){
+    var scrollTop = $(window).scrollTop();
+    if(offsetTop - menuHeight < scrollTop && offsetTop + height - menuHeight > scrollTop){
+      $itemMenu.addClass('active');
+    } else {
+      $itemMenu.removeClass('active');
+    }
+  })
 })
 
 
